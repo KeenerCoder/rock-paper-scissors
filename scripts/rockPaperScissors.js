@@ -7,33 +7,60 @@ let computerSelection;
 let roundResult;
 // Create variable to store selection options
 const selectionOptions = ["rock", "paper", "scissors"];
+// Create variable to store playerWinCount initialze to zero
+let playerWinCount = 0;
+// Create variable to store computerWinCount initialize to zero
+let computerWinCount = 0;
+// Create variable to store gameResult
+let gameResult;
 
-// Prompt user input for Rock, Paper, Scissors
-// Store user selection into variable
-playerSelection = promptUserForSelection();
 
-// Ensure input is compared case-insensitve
-// make use response lowercase
-playerSelection = makeUserSelectionLowerCase(playerSelection);
-// validate user selection is one of the valid options
-// while not valid send message to user to reenter valid response
-// while (isUserSelectionValid(!playerSelection)) {
-//     // Prompt user input for Rock, Paper, Scissors
-//     // Store user selection into variable
-//     playerSelection = promptUserForSelection();
+game();
+game();
+game();
+game()
+game();
 
-//     // Ensure input is compared case-insensitve
-//     // make use response lowercase
-//     playerSelection = makeUserSelectionLowerCase(playerSelection);
-// }
-// if valid user selection then computer will generate random selection
-computerSelection = computerPlay();
-//determine user result (win/lose/tie) based on rules
-// compare user selection to computer selection
-// determine if user is winner or loser based on rules
+// Message user with declared result (winner/loser/tie)
+if (playerWinCount > computerWinCount)
+    gameResult = `You win ${playerWinCount} to ${computerWinCount}.`;
+else if (playerWinCount < computerWinCount)
+    gameResult = `You lose ${computerWinCount} to ${playerWinCount}.`;
+else
+    gameResult = `Game ended in draw of ${computerWinCount} to ${playerWinCount}.`;
 
-console.log(determinePlayerResult(playerSelection, computerSelection));
-// message user the user's result
+console.log(gameResult);
+
+
+function game() {
+
+    // Prompt user input for Rock, Paper, Scissors
+    // Store user selection into variable
+    playerSelection = promptUserForSelection();
+
+    // Ensure input is compared case-insensitve
+    // make use response lowercase
+    playerSelection = makeUserSelectionLowerCase(playerSelection);
+    // validate user selection is one of the valid options
+    // while not valid send message to user to reenter valid response
+    // while (isUserSelectionValid(!playerSelection)) {
+    //     // Prompt user input for Rock, Paper, Scissors
+    //     // Store user selection into variable
+    //     playerSelection = promptUserForSelection();
+
+    //     // Ensure input is compared case-insensitve
+    //     // make use response lowercase
+    //     playerSelection = makeUserSelectionLowerCase(playerSelection);
+    // }
+    // if valid user selection then computer will generate random selection
+    computerSelection = computerPlay();
+    //determine user result (win/lose/tie) based on rules
+    // compare user selection to computer selection
+    // determine if user is winner or loser based on rules
+
+    console.log(determinePlayerResult(playerSelection, computerSelection));
+    // message user the user's result
+}
 
 
 
@@ -76,10 +103,12 @@ function determinePlayerResult(playerSelection, computerSelection) {
         if (computerSelection === selectionOptions[1]) // paper
         {
             roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            computerWinCount++;
         }
         else if (computerSelection === selectionOptions[2]) // scissors
         {
             roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            playerWinCount++;
         }
     }
     else if (playerSelection === selectionOptions[1]) //paper
@@ -87,10 +116,12 @@ function determinePlayerResult(playerSelection, computerSelection) {
         if (computerSelection === selectionOptions[2]) // scissors
         {
             roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            computerWinCount++;
         }
         else if (computerSelection === selectionOptions[0]) // rock
         {
             roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            playerWinCount++;
         }
     }
     else if (playerSelection === selectionOptions[2]) //scissors
@@ -98,10 +129,12 @@ function determinePlayerResult(playerSelection, computerSelection) {
         if (computerSelection === selectionOptions[0]) // rock
         {
             roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            computerWinCount++;
         }
         else if (computerSelection === selectionOptions[1]) // paper
         {
             roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            playerWinCount++;
         }
     }
     return roundResult;
