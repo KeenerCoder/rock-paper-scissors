@@ -63,7 +63,7 @@ function determinePlayerResult(playerSelection, computerSelection) {
     // compare user selection to computer selection
     // determine user result (win/lose/tie) based on rules
     //        rules: rock beats scissors
-    //               paper beats rock
+    //                paper beats rock
     //               scissors beats paper
 
     if (playerSelection === computerSelection) // tie 
