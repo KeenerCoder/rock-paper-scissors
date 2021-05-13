@@ -11,32 +11,44 @@ const selectionOptions = ["rock", "paper", "scissors"];
 let playerWinCount = 0;
 // Create variable to store computerWinCount initialize to zero
 let computerWinCount = 0;
-// Create variable to store gameResult
-let gameResult;
+// Create variable to store matchResult
+let matchResult;
+let divRound = document.querySelector("#roundResult");
+let divScore = document.querySelector("#runningScore");
+let divMatch = document.querySelector("#matchResult");
 
 
-game();
-game();
-game();
-game()
-game();
+let rock = document.querySelector("#rock");
+rock.addEventListener("click", function (e) {
+    playRound(this.id);
+})
 
-// Message user with declared result (winner/loser/tie)
-if (playerWinCount > computerWinCount)
-    gameResult = `You win ${playerWinCount} to ${computerWinCount}.`;
-else if (playerWinCount < computerWinCount)
-    gameResult = `You lose ${computerWinCount} to ${playerWinCount}.`;
-else
-    gameResult = `Game ended in draw of ${computerWinCount} to ${playerWinCount}.`;
+let paper = document.querySelector("#paper");
+paper.addEventListener("click", function (e) {
+    playRound(this.id);
+})
 
-console.log(gameResult);
+let scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", function (e) {
+    playRound(this.id);
+})
+divMatch.style.fontbold = true;
+divMatch.textContent = matchResult;
 
 
-function game() {
+
+
+function playRound(id) {
+
+    // If match is already done, then reset all the values
+    if (divMatch.innerHTML.length > 0) {
+        resetMatch();
+    }
 
     // Prompt user input for Rock, Paper, Scissors
     // Store user selection into variable
-    playerSelection = promptUserForSelection();
+    // playerSelection = promptUserForSelection();
+    playerSelection = id.toString();
 
     // Ensure input is compared case-insensitve
     // make use response lowercase
@@ -57,12 +69,50 @@ function game() {
     //determine user result (win/lose/tie) based on rules
     // compare user selection to computer selection
     // determine if user is winner or loser based on rules
+    roundResult = determineRoundResult(playerSelection, computerSelection);
+    divRound.innerHTML += roundResult + "<br/>";
 
-    console.log(determinePlayerResult(playerSelection, computerSelection));
+    displayScore();
+
+    if (isMatchFinished()) {
+        declareWinner();
+    }
+
     // message user the user's result
 }
 
+function resetMatch() {
+    computerWinCount = 0;
+    playerWinCount = 0;
+    divScore.innerHTML = "";
+    divMatch.innerHTML = "";
+    divRound.innerHTML = ""
+}
 
+
+function isMatchFinished() {
+    return (computerWinCount === 5 || playerWinCount === 5);
+}
+function displayScore() {
+    divScore.innerHTML = `Your score: ${playerWinCount} Computer score: ${computerWinCount}`;
+}
+
+function declareWinner() {
+    // Message user with declared result (winner/loser/tie)
+    if (playerWinCount > computerWinCount) {
+        divMatch.style.color = "green";
+        matchResult = `You win ${playerWinCount} to ${computerWinCount}.`;
+    }
+    else if (playerWinCount < computerWinCount) {
+        divMatch.style.color = "red";
+        matchResult = `You lose ${computerWinCount} to ${playerWinCount}.`;
+    }
+    else
+        matchResult = `Game ended in draw of ${computerWinCount} to ${playerWinCount}.`;
+
+    divMatch.innerHTML = matchResult;
+
+}
 
 function promptUserForSelection() {
     return prompt("Please enter rock, paper, or scissors");
@@ -72,7 +122,7 @@ function makeUserSelectionLowerCase(selection) {
 }
 
 function isUserSelectionValid(selection) {
-    return (seletion === selectionOptions[0] || // rock
+    return (selection === selectionOptions[0] || // rock
         selection === selectionOptions[1] || // paper
         selection === selectionOptions[2]); // scissors
 }
@@ -86,7 +136,7 @@ function computerPlay() {
     return selectionOptions[optionNumber];
 }
 
-function determinePlayerResult(playerSelection, computerSelection) {
+function determineRoundResult(playerSelection, computerSelection) {
     // compare user selection to computer selection
     // determine user result (win/lose/tie) based on rules
     //        rules: rock beats scissors
