@@ -47,7 +47,6 @@ function playRound(id) {
 
     // Prompt user input for Rock, Paper, Scissors
     // Store user selection into variable
-    // playerSelection = promptUserForSelection();
     playerSelection = id.toString();
 
     // Ensure input is compared case-insensitve
@@ -55,15 +54,7 @@ function playRound(id) {
     playerSelection = makeUserSelectionLowerCase(playerSelection);
     // validate user selection is one of the valid options
     // while not valid send message to user to reenter valid response
-    // while (isUserSelectionValid(!playerSelection)) {
-    //     // Prompt user input for Rock, Paper, Scissors
-    //     // Store user selection into variable
-    //     playerSelection = promptUserForSelection();
 
-    //     // Ensure input is compared case-insensitve
-    //     // make use response lowercase
-    //     playerSelection = makeUserSelectionLowerCase(playerSelection);
-    // }
     // if valid user selection then computer will generate random selection
     computerSelection = computerPlay();
     //determine user result (win/lose/tie) based on rules
@@ -152,12 +143,12 @@ function determineRoundResult(playerSelection, computerSelection) {
     {
         if (computerSelection === selectionOptions[1]) // paper
         {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            roundResult = `You lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
             computerWinCount++;
         }
         else if (computerSelection === selectionOptions[2]) // scissors
         {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            roundResult = `You win! ${playerSelectioncccc} beats ${computerSelection.toUpperCase()}.`;
             playerWinCount++;
         }
     }
@@ -165,12 +156,12 @@ function determineRoundResult(playerSelection, computerSelection) {
     {
         if (computerSelection === selectionOptions[2]) // scissors
         {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            roundResult = `You lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
             computerWinCount++;
         }
         else if (computerSelection === selectionOptions[0]) // rock
         {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            roundResult = `You win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
             playerWinCount++;
         }
     }
@@ -178,12 +169,12 @@ function determineRoundResult(playerSelection, computerSelection) {
     {
         if (computerSelection === selectionOptions[0]) // rock
         {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}.`;
+            roundResult = `You lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
             computerWinCount++;
         }
         else if (computerSelection === selectionOptions[1]) // paper
         {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}.`;
+            roundResult = `You win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
             playerWinCount++;
         }
     }
